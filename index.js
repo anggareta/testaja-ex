@@ -1,71 +1,17 @@
-const http = require('http')
-const {Client} = require('pg')
+const http = require('http');
 
-const PORT = process.env.PORT || 3000
-const conn = 'postgres://postgres:P@ssw0rd@localhost:5432/ayus'
-//const conn = 'postgres://sxdesljjsbbagl:54a46a5568ca86005c81bf28dba79e7fd36f96bbcf177ae1efedd952109c08b8@ec2-54-83-61-142.compute-1.amazonaws.com:5432/d2jsbbh8rvn94r'
+const hostname = '127.0.0.1';
+const port = 3300;
 
-/*const client = new Client({
-  //connectionString:conn
-  user: 'postgres',
-  password: 'P@ssw0rd',
-  host: 'localhost',
-  port: 5432,
-  database: 'ayus'
-});*/
-http.createServer(function (req, res) {
-  var client = new Client(conn)
-  client.connect();
-
-  res.writeHead(200, { 'Content-type': 'text/html' });
-  res.write("<h1>Hello world!</h1>");
-  client.query('select * from "myTable" order by "id"')
-    .then(result => {
-      console.table(result.rows)
-      res.write('<table>');
-      //res.write('<tr><td>nama</td></tr>');
-      for (var i = 0; i < result.rows.length; i++) {
-        res.write('<tr><td>' + result.rows[i].id + '</td><td>' + result.rows[i].name + '</td></tr>');
-      }
-      res.write('</table>');
-      res.end("<h2>this is the end!</h2>")
-    })
-    .catch(e => console.log(e))
-    .finally(() => client.end())
-
-}).listen(PORT, () => {
-  console.log(`Listening on ${PORT}`)
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  //res.end('Hello World');
+  res.end('[{"id":9,"name":"Glenna Reichert","username":"Delphine","email":"Chaim_McDermott@dana.io","address":{"street":"Dayna Park","suite":"Suite 449","city":"Bartholomebury","zipcode":"76495-3109","geo":{"lat":"24.6463","lng":"-168.8889"}},"phone":"(775)976-6794 x41206","website":"conrad.com","company":{"name":"Yost and Sons","catchPhrase":"Switchable contextually-based project","bs":"aggregate real-time technologies"}},'+
+  '{"id": 1,"name": "Leanne Graham","username": "Bret","email": "Sincere@april.biz","address": {"street": "Kulas Light","suite": "Apt. 556","city": "Gwenborough","zipcode": "92998-3874","geo": {"lng": "81.1496"}},"phone": "1-770-736-8031 x56442","website": "hildegard.org","company": {"name": "Romaguera-Crona","catchPhrase": "Multi-layered client-server neural-net","bs": "harness real-time e-markets"}}'+
+  ']');
 });
 
-/*
-var client = new pg.Client({
-  connectionString: conn
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
-http.createServer(function (req, res) {
-  res.writeHead(200, { 'Content-type': 'text/html' });
-  res.write("<h1>Hello world!</h1>");
-  client.connect()
-    .then(() => console.log('konek sukses'))
-    .then(() => client.query('select * from "myTable" order by "id"'))
-    .then(result => {
-      console.table(result.rows)
-      res.write('<table>');
-      //res.write('<tr><td>nama</td></tr>');
-      for (var i = 0; i < result.rows.length; i++) {
-        res.write('<tr><td>' + result.rows[i].id + '</td><td>' + result.rows[i].name + '</td></tr>');
-      }
-      res.write('</table>');
-    })
-    .catch(e => {
-      console.log(e)
-      res.write(`ada sesuatu yang salah, ${e}`)
-    })
-    .finally(() => {
-      client.end()
-      res.end("<h2>this is the end!</h2>")
-    });
-
-}).listen(PORT, () => {
-  console.log(`Listening on ${PORT}`)
-});
-*/
