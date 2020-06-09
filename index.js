@@ -6,7 +6,7 @@ var app = express();
 app.get('/', function (req, res) {
   // initialize the container for our data
   const { headers, method, url } = req;
-  let body = [{pesan:"halo dunia!"},{url:"/users"}];
+  let body = [{pesan:"halo dunia!"},{url:"/users"},{port:PORT}];
   const responseBody = { headers, method, url, body };
   //res.send(JSON.stringify(responseBody));
   res.json(responseBody);
