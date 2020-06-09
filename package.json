@@ -1,7 +1,7 @@
 {
-  "name": "test aja",
-  "version": "0.1.1",
-  "description": "mencoba",
+  "name": "node-js-getting-started",
+  "version": "0.3.0",
+  "description": "A sample Node.js app using Express 4",
   "engines": {
     "node": "10.x"
   },
@@ -11,16 +11,21 @@
     "test": "node test.js"
   },
   "dependencies": {
+    "ejs": "^2.7.1",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anggareta/testaja"
+    "url": "https://github.com/heroku/node-js-getting-started"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
-  "license": "ayus"
+  "license": "MIT"
 }
