@@ -1,6 +1,6 @@
 const express = require("express");
 const PORT = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
-const hostname = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+const IP = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 var app = express();
 
@@ -25,7 +25,7 @@ app.get('/users', function (req, res) {
 
 });
 
-var server = app.listen(PORT, hostname, function () {
+var server = app.listen(PORT, IP, function () {
   console.log(`Server is running.., listen on ${PORT}`);
 });
 
